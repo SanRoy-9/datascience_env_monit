@@ -1,0 +1,5 @@
+[fr_sr651@uc3n069 scripts]$ python3 cluster_hello.py
+Host: uc3n069.localdomain
+Job ID: 8222538
+Resamples: 5000
+Mean daily GPP: 4.01 (95% CI 3.84 to 4.17)
