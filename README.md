@@ -1,6 +1,6 @@
 # Environmental Monitoring Data Science
 
-Coursework repository for **Environmental Monitoring Data Science** (Sanglap Roy, Student 22). This repository contains reproducible workflows for high-performance computing exercises (Block 2) and half-hourly eddy-covariance data analysis across five global FLUXNET towers (Block 4).
+**Environmental Monitoring Data Science** (Sanglap Roy, Student 22). This repository contains reproducible workflows for high-performance computing exercises (Block 2) and half-hourly eddy-covariance data analysis across five global FLUXNET towers (Block 4).
 
 ---
 
