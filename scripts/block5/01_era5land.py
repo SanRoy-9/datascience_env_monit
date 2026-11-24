@@ -39,14 +39,14 @@ import cdsapi  # noqa: E402
 
 VARIABLES = [
     "2m_temperature",
-    "volumetric_soil_water_layer_1",   # 0–7 cm   (m3 m-3)
-    "volumetric_soil_water_layer_2",   # 7–28 cm
-    "volumetric_soil_water_layer_3",   # 28–100 cm
+    "volumetric_soil_water_level_1",   # 0–7 cm   (m3 m-3)
+    "volumetric_soil_water_level_2",   # 7–28 cm
+    "volumetric_soil_water_level_3",   # 28–100 cm
     "soil_temperature_level_1",        # 0–7 cm   (K)
 ]
 # More: "total_precipitation", "surface_solar_radiation_downwards", "snow_depth", ...
 # Careful: precipitation and radiation are ACCUMULATED in ERA5-Land; look before you sum.
-YEARS_BACK = 10   # years at the end of each tower record (the CDS has quotas)
+YEARS_BACK = 25   # years at the end of each tower record (the CDS has quotas)
 
 args = parse_args("ERA5-Land time series for your towers")
 sites = get_my_sites(args.student, args.sites)

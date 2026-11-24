@@ -1,0 +1,10 @@
+﻿Variable (units),Description,Mean / Mean Annual Sum (P_F),Minimum,Maximum,% Missing
+TA_F (°C),Air temperature,5.18,-23.15,25.12,0.00%
+SW_IN_F (W m⁻²),Incoming shortwave radiation,228.10,0.00,1379.79,0.00%
+VPD_F (hPa),Vapour pressure deficit,5.88,0.00,28.98,0.00%
+P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),492.8 (mm yr⁻¹),0.00,25.20,0.00%
+NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-0.26,-76.89,15.43,2.52%
+GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),1.57,-14.40,77.43,2.52%
+RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),1.36,0.00,7.50,2.52%
+H_F_MDS (W m⁻²),Sensible heat flux,40.70,-199.79,797.47,2.49%
+LE_F_MDS (W m⁻²),Latent heat flux,38.69,-20.00,549.74,2.49%

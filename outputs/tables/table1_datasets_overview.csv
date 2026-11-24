@@ -1,0 +1,6 @@
+site_id,igbp,country,years_dheed,dheed_events,event_days_total,event_days_qc50,normal_days_qc50,swvl1_norm_m3m3,swvl1_ev_m3m3,swvl3_norm_m3m3,swvl3_ev_m3m3,dNEE_mean_gCm2d,dGPP_mean_gCm2d
+ID-PaD,EBF,ID,2001-2017,4,29,8,4398,0.351,0.114,0.355,0.22,0.75,
+US-Vcm,ENF,US,2007-2023,8,53,38,5107,0.31,0.163,0.312,0.271,0.72,-1.05
+NL-Vkp,GRA,NL,2014-2023,2,8,8,3484,0.325,0.134,0.318,0.244,0.7,0.9
+BE-Lon,CRO,BE,2004-2023,5,19,19,6881,0.342,0.169,0.326,0.213,3.48,-4.6
+AU-How,WSA,AU,2002-2023,4,13,13,7273,0.261,0.148,0.282,0.194,0.76,-2.22

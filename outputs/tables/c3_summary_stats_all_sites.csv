@@ -1,0 +1,46 @@
+﻿Site,Variable (units),Description,Mean / Mean Annual Sum (P_F),Minimum,Maximum,% Missing
+AU-How,TA_F (°C),Air temperature,26.90,9.48,39.94,0.00%
+AU-How,SW_IN_F (W m⁻²),Incoming shortwave radiation,234.81,0.00,1287.00,0.00%
+AU-How,VPD_F (hPa),Vapour pressure deficit,12.66,0.00,57.79,0.00%
+AU-How,P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),1672.3 (mm yr⁻¹),0.00,48.20,0.00%
+AU-How,NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-1.92,-78.44,51.89,3.36%
+AU-How,GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),5.41,-45.86,81.38,11.68%
+AU-How,RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),3.46,0.00,11.10,7.52%
+AU-How,H_F_MDS (W m⁻²),Sensible heat flux,42.12,-100.00,689.00,3.35%
+AU-How,LE_F_MDS (W m⁻²),Latent heat flux,87.99,-98.00,1076.00,3.35%
+BE-Lon,TA_F (°C),Air temperature,11.15,-18.40,39.82,0.00%
+BE-Lon,SW_IN_F (W m⁻²),Incoming shortwave radiation,127.11,0.00,1045.30,0.00%
+BE-Lon,VPD_F (hPa),Vapour pressure deficit,3.27,0.00,59.38,0.00%
+BE-Lon,P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),740.0 (mm yr⁻¹),0.00,28.20,0.00%
+BE-Lon,NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-0.91,-50.28,42.73,2.10%
+BE-Lon,GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),3.53,-35.48,69.31,2.10%
+BE-Lon,RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),2.62,0.13,22.02,2.10%
+BE-Lon,H_F_MDS (W m⁻²),Sensible heat flux,6.39,-190.91,446.85,1.23%
+BE-Lon,LE_F_MDS (W m⁻²),Latent heat flux,29.43,-120.97,566.63,2.09%
+ID-PaD,TA_F (°C),Air temperature,26.20,15.22,35.21,0.00%
+ID-PaD,SW_IN_F (W m⁻²),Incoming shortwave radiation,196.10,0.00,1318.00,0.00%
+ID-PaD,VPD_F (hPa),Vapour pressure deficit,7.21,0.00,38.55,0.00%
+ID-PaD,P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),2536.3 (mm yr⁻¹),0.00,55.63,0.00%
+ID-PaD,NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-0.72,-62.65,49.80,15.09%
+ID-PaD,GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),—,—,—,100.00%
+ID-PaD,RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),—,—,—,100.00%
+ID-PaD,H_F_MDS (W m⁻²),Sensible heat flux,28.96,-145.51,424.92,11.25%
+ID-PaD,LE_F_MDS (W m⁻²),Latent heat flux,94.11,-205.72,989.95,13.95%
+NL-Vkp,TA_F (°C),Air temperature,11.08,-10.95,37.85,0.00%
+NL-Vkp,SW_IN_F (W m⁻²),Incoming shortwave radiation,125.96,0.00,1053.87,0.00%
+NL-Vkp,VPD_F (hPa),Vapour pressure deficit,3.62,0.00,47.72,0.00%
+NL-Vkp,P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),850.4 (mm yr⁻¹),0.00,27.09,0.00%
+NL-Vkp,NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-0.13,-79.99,49.91,2.22%
+NL-Vkp,GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),4.76,-49.02,85.55,2.22%
+NL-Vkp,RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),4.67,0.00,25.36,2.22%
+NL-Vkp,H_F_MDS (W m⁻²),Sensible heat flux,1.17,-295.89,963.97,2.22%
+NL-Vkp,LE_F_MDS (W m⁻²),Latent heat flux,49.54,-299.62,882.82,2.22%
+US-Vcm,TA_F (°C),Air temperature,5.18,-23.15,25.12,0.00%
+US-Vcm,SW_IN_F (W m⁻²),Incoming shortwave radiation,228.10,0.00,1379.79,0.00%
+US-Vcm,VPD_F (hPa),Vapour pressure deficit,5.88,0.00,28.98,0.00%
+US-Vcm,P_F (mm yr⁻¹ | mm (30 min)⁻¹),Precipitation (mean = annual sum),492.8 (mm yr⁻¹),0.00,25.20,0.00%
+US-Vcm,NEE_VUT_REF (µmol CO₂ m⁻² s⁻¹),Net ecosystem exchange,-0.26,-76.89,15.43,2.52%
+US-Vcm,GPP_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Gross primary production (NT),1.57,-14.40,77.43,2.52%
+US-Vcm,RECO_NT_VUT_REF (µmol CO₂ m⁻² s⁻¹),Ecosystem respiration (NT),1.36,0.00,7.50,2.52%
+US-Vcm,H_F_MDS (W m⁻²),Sensible heat flux,40.70,-199.79,797.47,2.49%
+US-Vcm,LE_F_MDS (W m⁻²),Latent heat flux,38.69,-20.00,549.74,2.49%
