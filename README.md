@@ -1,15 +1,16 @@
 # Environmental Monitoring and Data Analysis
 
-Course material and student repository (**SanRoy-9**, Student 22) for the Master's course *Environmental Monitoring and Data Analysis* (1st semester, environmental science), Chair of Sensor-based Geoinformatics, University of Freiburg. Winter semester 2026/27.  
-Lab website: <https://uni-freiburg.de/enr-geosense>
-
-In this course you follow a set of five flux towers through the whole life of environmental data: you download their measurements, add satellite, climate and site data, clean and analyse the time series, model the fluxes, put everything into a shared database, and present what you found on a poster. Along the way you learn the tools of reproducible data science: Git and GitHub, R or Python, Quarto reports and the bwUniCluster.
+In this you follow a set of five flux towers through the whole life of environmental data: you download their measurements, add satellite, climate and site data, clean and analyse the time series, model the fluxes, put everything into a shared database, and present what you found on a poster. Along the way you learn the tools of reproducible data science: Git and GitHub, R or Python, Quarto reports and the bwUniCluster.
 
 ## Contents
 
 - [Quick start](#quick-start)
+- [Course schedule](#course-schedule)
+- [Completed blocks & deliverables](#completed-blocks--deliverables)
+  - [Block 2: Git, GitHub & Remote Computing on bwUniCluster](#block-2-git-github--remote-computing-on-bwunicluster)
+  - [Block 4: FLUXNET Half-Hourly Data Acquisition & Summary](#block-4-fluxnet-half-hourly-data-acquisition--summary)
+  - [Block 5: Complementary Datasets & Compound Dry-and-Hot Event Analysis](#block-5-complementary-datasets--compound-dry-and-hot-event-analysis)
 - [What is in this repository](#what-is-in-this-repository)
-- [Block 5 task: compound dry-and-hot events](#block-5-task-compound-dry-and-hot-events)
 - [Getting new material every week: `upstream`](#getting-new-material-every-week-upstream)
 - [Your data](#your-data)
 - [Software you need](#software-you-need)
@@ -33,6 +34,74 @@ In this course you follow a set of five flux towers through the whole life of en
    You should see `origin` (your fork) and `upstream` (the course repository).
 4. Every week: **sync**, then follow the assignment sheet in `assignments/`. Commit small, push to your fork, hand in on ILIAS.
 
+You never push to `upstream`. You work in your fork (`origin`), so your changes never touch the course material.
+
+
+## Completed blocks & deliverables
+
+### Block 2: Git, GitHub & Remote Computing on bwUniCluster
+
+- **What was done:** Configured this repository as a forked Git workflow (`origin` → `SanRoy-9`, `upstream` → `negin-katal`) with `.gitignore` rules excluding raw/large datasets. Set up key-based SSH access to the Karlsruhe Institute of Technology `bwUniCluster` (`uc3.scc.kit.edu`), submitted and monitored Slurm batch compute jobs, and documented high-performance workspace directories and expiration dates.
+- **Outputs:**
+  - Cluster execution & Slurm scripts: `scripts/cluster_hello.py` and `jobs/`
+  - Workspace storage documentation: [`docs/STORAGE.md`](docs/STORAGE.md)
+- **Key outcomes:** Verified end-to-end version control syncing between `upstream` and `origin`, and confirmed non-interactive batch job scheduling and workspace storage management on `bwUniCluster`.
+
+---
+
+### Block 4: FLUXNET Half-Hourly Data Acquisition & Summary
+
+- **What was done:** Downloaded ONEFlux `v1.3_r1` eddy-covariance archives (`_FLUXMET_HH_` and `_FLUXMET_DD_`) via the FLUXNET Shuttle (`scripts/get_my_towers.py --student 22`, snapshot `fluxnet_shuttle_snapshot_20261116T075027.csv`) for Student 22's five towers:
+  - `AU-How` — Howard Springs, Australia (`WSA`, woody savanna, 2002–2025)
+  - `BE-Lon` — Lonzee, Belgium (`CRO`, cropland, 2004–2024)
+  - `ID-PaD` — Palangkaraya Drained Forest, Indonesia (`EBF`, evergreen broadleaf forest, 2001–2017)
+  - `NL-Vkp` — Veenkampen, Netherlands (`GRA`, grassland, 2014–2025)
+  - `US-Vcm` — Valles Caldera Mixed Conifer, USA (`ENF`, evergreen needleleaf forest, 2007–2025)
+  Parsed half-hourly series with `scripts/read_flux.py` (`-9999` → `NaN`, local standard timestamps), evaluated `NEE_VUT_REF_QC` data coverage, aggregated half-hourly carbon fluxes to daily units ($\text{g C m}^{-2}\text{ d}^{-1}$) validated against `FLUXMET_DD`, compared hemisphere-aware seasonal diurnal cycles of $\text{NEE}$ and latent heat flux ($\text{LE}$), and assessed surface energy-balance closure at `AU-How`.
+- **Outputs:**
+  - **Report & Notebook:** [`reports/W04_sr651_tower_data.html`](reports/W04_sr651_tower_data.html) and [`reports/block4_summary.ipynb`](reports/block4_summary.ipynb)
+  - **Figures (`outputs/figures/`):**
+    - [`c1_site_locations_map.png`](outputs/figures/c1_site_locations_map.png) — Global map of the five flux towers
+    - [`c2_nee_data_coverage.png`](outputs/figures/c2_nee_data_coverage.png) — Annual share of measured half-hourly $\text{NEE}$ (`QC == 0`)
+    - [`c4_daily_carbon_flux_timeseries.png`](outputs/figures/c4_daily_carbon_flux_timeseries.png) — Daily $\text{GPP}$, $\text{RECO}$, and $\text{NEE}$ time series
+    - [`c5_seasonal_diurnal_cycles.png`](outputs/figures/c5_seasonal_diurnal_cycles.png) — Hemisphere-adjusted seasonal diurnal cycles of $\text{NEE}$ and $\text{LE}$
+    - [`c6_au_how_energy_balance_closure.png`](outputs/figures/c6_au_how_energy_balance_closure.png) — Measured half-hourly energy-balance closure at `AU-How`
+  - **Tables (`outputs/tables/`):** [`c1_site_overview.csv`](outputs/tables/c1_site_overview.csv), [`c2_nee_coverage_by_year.csv`](outputs/tables/c2_nee_coverage_by_year.csv), [`c3_summary_stats_all_sites.csv`](outputs/tables/c3_summary_stats_all_sites.csv) (plus per-site `c3_summary_stats_<SITE>.csv`), and [`c4_us_vcm_fluxmet_dd_validation.csv`](outputs/tables/c4_us_vcm_fluxmet_dd_validation.csv)
+- **Key findings:**
+  - **Net carbon balance:** Tropical savanna `AU-How` exhibits the strongest annual net uptake (`−730.1 g C m⁻² yr⁻¹`), followed by cropland `BE-Lon` (`−347.1`), peatland `ID-PaD` (`−236.8`), subalpine conifer `US-Vcm` (`−96.9`), and wet grassland `NL-Vkp` (`−47.3`, nearly carbon-neutral despite high $\text{GPP} = 1,820.5\text{ g C m}^{-2}\text{ yr}^{-1}$).
+  - **Seasonality & data gaps:** `BE-Lon` shows the widest seasonal $\text{NEE}$ amplitude (`6.24 µmol CO₂ m⁻² s⁻¹`), while `ID-PaD` has the lowest measured $\text{NEE}$ coverage (`19.4%`) and lacks nighttime-partitioned `GPP_NT_VUT_REF` and `RECO_NT_VUT_REF` (`100%` `-9999` in `v1.3_r1`).
+  - **Energy closure:** At `AU-How`, measured turbulent fluxes (`H + LE`) against available energy (`NETRAD − G`) yield an OLS slope of `0.819` ($R^2 = 0.887$, $n = 254,495$).
+
+---
+
+### Block 5: Complementary Datasets & Compound Dry-and-Hot Event Analysis
+
+- **What was done:** Tested whether compound dry-and-hot (Dheed) extreme events weaken ecosystem carbon uptake across the five towers and whether carbon sink loss scales with root-zone soil moisture deficits (`swvl3`). Merged daily FLUXNET records (`FLUXMET_DD`, filtered to `NEE_VUT_REF_QC >= 0.50`) with:
+  1. **ERA5-Land hourly time series** (`0.1°`, `2001–2025`, downloaded via [`scripts/block5/01_era5land.py`](scripts/block5/01_era5land.py) with `YEARS_BACK = 25` and `volumetric_soil_water_level_1..3` aggregated to daily means), and
+  2. **Dheed compound extreme database** (`0.25°`, `1950–2023`, exact tower grid-cell labels extracted from Zarr `LabelCube` via [`scripts/block5/03_dheed.py`](scripts/block5/03_dheed.py)).
+  Merged datasets in [`scripts/block5/09_merge.py`](scripts/block5/09_merge.py) (`33,969` tower-days), computed same-DOY ($\pm 15\text{ day}$) non-event anomalies across `2001–2023` in [`scripts/block5/10_prepare_q3.py`](scripts/block5/10_prepare_q3.py), and performed event- and tower-level hypothesis tests and OLS regressions in [`scripts/block5/11_analyze_q3.py`](scripts/block5/11_analyze_q3.py).
+- **Outputs:**
+  - **Report & Notebook:** [`reports/block5_question.html`](reports/block5_question.html) and [`reports/block5_question.ipynb`](reports/block5_question.ipynb)
+  - **Figures (`outputs/figures/`):**
+    - [`fig1_datasets_overview.png`](outputs/figures/fig1_datasets_overview.png) — ERA5-Land topsoil (`swvl1`) and root-zone (`swvl3`) soil moisture during normal vs. Dheed days and event timeline (`2001–2023`)
+    - [`fig2_q3_flux_response.png`](outputs/figures/fig2_q3_flux_response.png) — Event- and tower-level $\Delta\text{NEE}$ vs. $\Delta\text{GPP}$ and cross-tower OLS regression against root-zone soil moisture anomaly ($\Delta\text{swvl3}$)
+  - **Table (`outputs/tables/`):** [`table1_datasets_overview.csv`](outputs/tables/table1_datasets_overview.csv)
+- **Key findings:**
+  - **Soil moisture drawdown:** Across `2001–2023`, **22 unique Dheed events** (`122` total event days; `19` events and `86` days with $\text{QC} \ge 0.50$) reduced mean topsoil moisture (`swvl1`, 0–7 cm) by $0.11\text{ to }0.24\text{ m}^3\text{ m}^{-3}$ and root-zone moisture (`swvl3`, 28–100 cm) by $0.04\text{ to }0.14\text{ m}^3\text{ m}^{-3}$ at every tower.
+  - **Carbon sink weakening:** Every tower shifted toward positive $\Delta\text{NEE}$ anomalies during Dheed events, yielding a cross-tower mean of **$\Delta\text{NEE} = +1.22 \pm 1.27\text{ g C m}^{-2}\text{ d}^{-1}$** ($n = 5$ towers; one-sample $t = 2.15$, $p = 0.098$) and mean photosynthetic suppression of **$\Delta\text{GPP} = -1.77\text{ g C m}^{-2}\text{ d}^{-1}$** ($n = 4$ towers with partitioned GPP).
+  - **Soil moisture sensitivity:** Cross-tower OLS regression of $\Delta\text{NEE}$ on $\Delta\text{swvl3}$ yielded a slope of $-14.82\text{ g C m}^{-2}\text{ d}^{-1}\text{ per m}^3\text{ m}^{-3}$ ($r = -0.32$, $p = 0.603$, $n = 5$ towers), demonstrating that biome traits (such as groundwater access at peatland `ID-PaD` vs. rainfed cropping at `BE-Lon`) and scale mismatch between tower footprints (~$100\text{ m}$–$1\text{ km}$) and reanalysis grids ($9$–$28\text{ km}$) strongly mediate drought sensitivity.
+
+
+Each sheet has a time plan, *Check:* boxes after every step, a hand-in checklist and a troubleshooting table.
+
+| Block | Assignment | Due | Status & Hand-In Deliverables |
+| --- | --- | --- | --- |
+| 2 | [Git, GitHub and your first cluster job](assignments/block-2-git-github-cluster.md) | before Block 3 | Completed (`scripts/cluster_hello.py`, `jobs/`, [`docs/STORAGE.md`](docs/STORAGE.md)) |
+| 4 | [Download your towers and write a data summary](assignments/block-4-flux-data-summary.md) | before Block 5 | Completed ([`reports/W04_sr651_tower_data.html`](reports/W04_sr651_tower_data.html), [`reports/block4_summary.ipynb`](reports/block4_summary.ipynb)) |
+| 5 | [Test one question with your towers and two more datasets](assignments/block-5-complementary-data.md) | before Block 6 | Completed ([`reports/block5_question.html`](reports/block5_question.html), [`reports/block5_question.ipynb`](reports/block5_question.ipynb)) |
+
+New sheets are added here as the updated.
+
 
 ## What is in this repository
 
@@ -44,11 +113,10 @@ datascience_env_monit/
 │   ├── cluster_hello.*        Block 2: first job on bwUniCluster
 │   ├── get_my_towers.*        Block 4: download your five towers with the FLUXNET Shuttle
 │   ├── read_flux.py           Block 4: helper to parse half-hourly FLUXNET archives
-│   └── block5/                Block 5: ERA5-Land, WorldClim, Dheed, SoilGrids, PlantTraits,
-│                              deadtrees.earth, iNaturalist, MODIS NDVI/EVI, merge (see its README)
+│   └── block5/                Block 5: ERA5-Land, Dheed, merge & Q3 analysis scripts
 ├── jobs/                  Slurm job scripts for bwUniCluster
 ├── docs/                  templates and notes, e.g. STORAGE_TEMPLATE.md, STORAGE.md
-├── reports/               Quarto notebooks and rendered HTML reports (Blocks 4 & 5)
+├── reports/               Jupyter notebooks and rendered HTML reports (Blocks 4 & 5)
 ├── outputs/               exported figures (PNG) and summary tables (CSV)
 ├── ssh-connection/        SSH guide for bwUniCluster (also online, see below)
 ├── flux4student/          FLUXNET site explorer and weekly data of all course towers (also online)
@@ -63,26 +131,13 @@ datascience_env_monit/
 | `data/external/` | Block 5 datasets, one subfolder per dataset (`era5land/`, `dheed/`) | **no** |
 | `data/processed/` | Merged and quality-filtered tables built from raw/external data | **no** |
 | `reports/` | Jupyter notebooks and rendered HTML reports (`block4_summary.ipynb`, `W04_sr651_tower_data.html`, `block5_question.ipynb`, `block5_question.html`) | **yes** |
-| `outputs/` | Exported high-resolution figures (`outputs/figures/`) and CSV summary tables (`outputs/tables/`) | **yes** |
+| `outputs/` | Exported figures (`outputs/figures/`) and CSV summary tables (`outputs/tables/`) | **yes** |
 | `docs/STORAGE.md` | Where your data and results live, and when they expire | **yes** |
 
-Run all scripts from the top folder of your project (the one that contains `data/` and `scripts/`).
-
-## Block 5 task: compound dry-and-hot events
-
-- **Assigned tower set (Student 22):** `ID-PaD` (Palangkaraya Drained Forest, Indonesia, `EBF`, 2001–2017), `US-Vcm` (Valles Caldera Mixed Conifer, USA, `ENF`, 2007–2025), `NL-Vkp` (Veenkampen, Netherlands, `GRA`, 2014–2025), `BE-Lon` (Lonzee, Belgium, `CRO`, 2004–2024), and `AU-How` (Howard Springs, Australia, `WSA`, 2002–2025).
-- **Research question:** How do compound dry-and-hot (Dheed) extreme events alter daily net ecosystem $\text{CO}_2$ exchange ($\text{NEE}$) and gross primary productivity ($\text{GPP}$) across five contrasting FLUXNET towers, and does the magnitude of carbon sink loss scale with ERA5-Land root-zone soil moisture deficits (`swvl3`)?
-- **Complementary datasets & workflow (`scripts/block5/`):**
-  - **FLUXNET (`ONEFlux v1.3_r1`):** Daily `FLUXMET_DD` fluxes (`NEE_VUT_REF`, `GPP_NT_VUT_REF`, `RECO_NT_VUT_REF`, filtered at `NEE_VUT_REF_QC >= 0.50`) downloaded via `scripts/get_my_towers.py --student 22`.
-  - **ERA5-Land Hourly Time-Series (`reanalysis-era5-land-timeseries`, $0.1^\circ$):** Downloaded via `scripts/block5/01_era5land.py --student 22` (`YEARS_BACK = 25` covering `2001–2025`; `volumetric_soil_water_level_1..3` for topsoil `swvl1` 0–7 cm and root-zone `swvl3` 28–100 cm) and aggregated to daily means.
-  - **Dheed Database (`LabelCube` Zarr & `EventStats`, $0.25^\circ$, `1950–2023`):** Exact tower grid-cell event flags extracted via `scripts/block5/03_dheed.py --student 22`.
-  - **Merge & analysis:** Daily tables merged via `scripts/block5/09_merge.py` (`33,969` tower-days), anomalies computed relative to same-DOY ($\pm 15\text{ day}$) non-event baselines across `2001–2023` in `scripts/block5/10_prepare_q3.py`, and event/tower statistics & OLS regressions run in `scripts/block5/11_analyze_q3.py`.
-- **Key findings:** Across `2001–2023`, **22 unique Dheed events** (`122` total event days; `19` events / `86` days with $\text{QC} \ge 0.50$) weakened the net carbon sink across all five towers by a cross-tower mean of **$\Delta\text{NEE} = +1.22 \pm 1.27\text{ g C m}^{-2}\text{ d}^{-1}$** ($n = 5$ towers; one-sample $t = 2.15$, $p = 0.098$) and suppressed photosynthesis by **$\Delta\text{GPP} = -1.77\text{ g C m}^{-2}\text{ d}^{-1}$** ($n = 4$ towers with partitioned GPP). Cross-tower OLS sensitivity of $\Delta\text{NEE}$ to root-zone soil moisture anomaly ($\Delta\text{swvl3}$) is $-14.82\text{ g C m}^{-2}\text{ d}^{-1}\text{ per m}^3\text{ m}^{-3}$ ($r = -0.32$, $p = 0.603$, $n = 5$ towers), reflecting biome-specific traits and scale mismatch between tower footprints and reanalysis grids.
-- **Deliverables:** [`reports/block5_question.ipynb`](reports/block5_question.ipynb), [`reports/block5_question.html`](reports/block5_question.html), [`outputs/figures/fig1_datasets_overview.png`](outputs/figures/fig1_datasets_overview.png), [`outputs/figures/fig2_q3_flux_response.png`](outputs/figures/fig2_q3_flux_response.png), and [`outputs/tables/table1_datasets_overview.csv`](outputs/tables/table1_datasets_overview.csv).
 
 ## Getting new material every week: `upstream`
 
-Your fork is a copy of the course repository *from the day you forked it*. New material (assignment sheets, scripts) does **not** appear in your fork by itself, and `git pull` alone only talks to your fork (`origin`). You bring new material from the course repository (`upstream`):
+Tis fork is a copy of the course repository *from the day you forked it*. New material (assignment sheets, scripts) does **not** appear in your fork by itself, and `git pull` alone only talks to your fork (`origin`). You bring new material from the course repository (`upstream`):
 
 ```
 negin-katal/datascience_env_monit  (upstream)  ──pull──▶  your laptop  ──push──▶  SanRoy-9/datascience_env_monit  (origin)
